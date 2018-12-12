@@ -1,5 +1,5 @@
 {
-  "name": "angular-oauth2-oidc",
+  "name": "lacuna-oauth2-oidc",
   "version": "0.1.0",
   "scripts": {
     "tsc": "tsc",
