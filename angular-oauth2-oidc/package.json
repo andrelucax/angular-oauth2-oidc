@@ -6,7 +6,7 @@
     "build": "gulp build",
     "build:watch": "gulp",
     "docs": "npm run docs:build -- --disableCoverage --disablePrivate --disableInternal --includes md",
-    "docs:build": "compodoc -p tsconfig.json -n angular-oauth2-oidc -d docs --hideGenerator",
+    "docs:build": "compodoc -p tsconfig.json -n lacuna-oauth2-oidc -d docs --hideGenerator",
     "docs:serve": "npm run docs:build -- -s",
     "docs:watch": "npm run docs:build -- -s -w",
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
@@ -17,8 +17,8 @@
     "url": "https://github.com/username/repo"
   },
   "author": {
-    "name": "ManfredSteyer",
-    "email": "manfred.steyer@gmx.net"
+    "name": "Fernando Nunes",
+    "email": "ftfnunes@gmail.com"
   },
   "keywords": [
     "angular"

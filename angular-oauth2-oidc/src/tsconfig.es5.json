@@ -21,8 +21,8 @@
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
-    "flatModuleOutFile": "angular-oauth2-oidc.js",
-    "flatModuleId": "angular-oauth2-oidc"
+    "flatModuleOutFile": "lacuna-oauth2-oidc.js",
+    "flatModuleId": "lacuna-oauth2-oidc"
   },
   "files": [
     "./index.ts"
