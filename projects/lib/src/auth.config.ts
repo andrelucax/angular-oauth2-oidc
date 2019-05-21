@@ -188,6 +188,11 @@ export class AuthConfig {
    */
   public skipSubjectCheck? = false;
 
+  /*
+     * Defines wether to check the expiration time and the issued at time of the id token.
+    */ 
+   public skipExpirationChecks? = false;
+
   public useIdTokenHintForSilentRefresh? = false;
 
   /**

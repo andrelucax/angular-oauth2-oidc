@@ -110,10 +110,15 @@ export class JwksValidationHandler extends AbstractValidationHandler {
     }
 
     let keyObj = rs.KEYUTIL.getKey(key);
-    let validationOptions = {
+    let validationOptions: any = {
       alg: this.allowedAlgorithms,
       gracePeriod: this.gracePeriodInSec
     };
+
+    if (params.bypassTimestampCheck) {
+      validationOptions.verifyAt = params.idTokenClaims['exp'] - 1;
+    }
+
     let isValid = rs.KJUR.jws.JWS.verifyJWT(
       params.idToken,
       keyObj,

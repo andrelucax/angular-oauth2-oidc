@@ -1524,10 +1524,7 @@ export class OAuthService extends AuthConfig {
         const expiresAtMSec = claims.exp * 1000;
         const tenMinutesInMsec = 1000 * 60 * 10;
 
-        if (
-            issuedAtMSec - tenMinutesInMsec >= now ||
-            expiresAtMSec + tenMinutesInMsec <= now
-        ) {
+        if (!this.skipExpirationChecks && (issuedAtMSec - tenMinutesInMsec >= now  || expiresAtMSec + tenMinutesInMsec <= now)) {
             const err = 'Token has expired';
             console.error(err);
             console.error({
@@ -1544,6 +1541,7 @@ export class OAuthService extends AuthConfig {
             jwks: this.jwks,
             idTokenClaims: claims,
             idTokenHeader: header,
+            bypassTimestampCheck: this.skipExpirationChecks,
             loadKeys: () => this.loadJwks()
         };
 
