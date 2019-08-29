@@ -942,11 +942,11 @@ export class OAuthService extends AuthConfig {
                     break;
                 case 'changed':
                     this.ngZone.run(() => {
-                        this.handleSessionChange() 
+                        this.handleSessionChange()
                     });
                     break;
                 case 'error':
-                    this.ngZone.run(() => { 
+                    this.ngZone.run(() => {
                         this.handleSessionError()
                     });
                     break;
@@ -1451,19 +1451,26 @@ export class OAuthService extends AuthConfig {
         const claims = JSON.parse(claimsJson);
         const savedNonce = this._storage.getItem('nonce');
 
-        if (Array.isArray(claims.aud)) {
-            if (claims.aud.every(v => v !== this.clientId)) {
-                const err = 'Wrong audience: ' + claims.aud.join(',');
-                this.logger.warn(err);
-                return Promise.reject(err);
-            }
-        } else {
-            if (claims.aud !== this.clientId) {
-                const err = 'Wrong audience: ' + claims.aud;
-                this.logger.warn(err);
-                return Promise.reject(err);
-            }
+        let validAudiences = [this.clientId];
+
+        if (this.validAudiences) {
+          validAudiences = this.validAudiences;
         }
+
+        if (Array.isArray(claims.aud)) {
+          if (claims.aud.every(v => !validAudiences.some(va => va === v))) {
+              const err = 'Wrong audience: ' + claims.aud.join(',');
+              this.logger.warn(err);
+              return Promise.reject(err);
+          }
+        } else {
+          if (!validAudiences.some(va => va === claims.aud)) {
+              const err = 'Wrong audience: ' + claims.aud;
+              this.logger.warn(err);
+              return Promise.reject(err);
+          }
+        }
+
 
         if (!claims.sub) {
             const err = 'No sub claim in id_token';
