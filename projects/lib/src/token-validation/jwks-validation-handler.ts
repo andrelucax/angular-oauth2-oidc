@@ -1,19 +1,35 @@
+import * as rs from 'jsrsasign';
 import {
   AbstractValidationHandler,
-  ValidationParams
-} from './validation-handler';
+  ValidationParams,
+} from 'angular-oauth2-oidc';
 
-// declare var require: any;
-// let rs = require('jsrsasign');
+const err = `PLEASE READ THIS CAREFULLY:
 
-import * as rs from 'jsrsasign';
+Beginning with angular-oauth2-oidc version 9, the JwksValidationHandler
+has been moved to an library of its own. If you need it for implementing
+OAuth2/OIDC **implicit flow**, please install it using npm:
+
+  npm i angular-oauth2-oidc-jwks --save
+
+After that, you can import it into your application:
+
+  import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
+
+Please note, that this dependency is not needed for the **code flow**,
+which is nowadays the **recommented** one for single page applications.
+This also results in smaller bundle sizes.
+`;
 
 /**
- * Validates the signature of an id_token against one
- * of the keys of an JSON Web Key Set (jwks).
- *
- * This jwks can be provided by the discovery document.
+ * This is just a dummy of the JwksValidationHandler
+ * telling the users that the real one has been moved
+ * to an library of its own, namely angular-oauth2-oidc-utils
  */
+
+// Copied JwksValidationHandler from https://github.com/manfredsteyer/angular-oauth2-oidc/blob/3ba7303b5a6fdbae5ca214764c9191637cd00126/projects/angular-oauth2-oidc-jwks/src/lib/jwks-validation-handler.ts
+// And added Lacuna changes
+
 export class JwksValidationHandler extends AbstractValidationHandler {
   /**
    * Allowed algorithms
@@ -29,7 +45,7 @@ export class JwksValidationHandler extends AbstractValidationHandler {
     'ES384',
     'PS256',
     'PS384',
-    'PS512'
+    'PS512',
   ];
 
   /**
@@ -61,11 +77,11 @@ export class JwksValidationHandler extends AbstractValidationHandler {
     let alg = params.idTokenHeader['alg'];
 
     if (kid) {
-      key = keys.find(k => k['kid'] === kid /* && k['use'] === 'sig' */);
+      key = keys.find((k) => k['kid'] === kid /* && k['use'] === 'sig' */);
     } else {
       let kty = this.alg2kty(alg);
       let matchingKeys = keys.filter(
-        k => k['kty'] === kty && k['use'] === 'sig'
+        (k) => k['kty'] === kty && k['use'] === 'sig'
       );
 
       /*
@@ -87,8 +103,8 @@ export class JwksValidationHandler extends AbstractValidationHandler {
     if (!key && !retry && params.loadKeys) {
       return params
         .loadKeys()
-        .then(loadedKeys => (params.jwks = loadedKeys))
-        .then(_ => this.validateSignature(params, true));
+        .then((loadedKeys) => (params.jwks = loadedKeys))
+        .then((_) => this.validateSignature(params, true));
     }
 
     if (!key && retry && !kid) {
@@ -112,13 +128,11 @@ export class JwksValidationHandler extends AbstractValidationHandler {
     let keyObj = rs.KEYUTIL.getKey(key);
     let validationOptions: any = {
       alg: this.allowedAlgorithms,
-      gracePeriod: this.gracePeriodInSec
+      gracePeriod: this.gracePeriodInSec,
     };
-
     if (params.bypassTimestampCheck) {
       validationOptions.verifyAt = params.idTokenClaims['exp'] - 1;
     }
-
     let isValid = rs.KJUR.jws.JWS.verifyJWT(
       params.idToken,
       keyObj,
