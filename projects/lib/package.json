@@ -4,7 +4,7 @@
   "author": {
     "name": "Fernando Nunes"
   },
-  "version": "6.1.0-alpha.1",
+  "version": "6.1.0-alpha.2",
   "repository": "LacunaSoftware/angular-oauth2-oidc",
   "peerDependencies": {
     "@angular/common": ">=14.0.0",
