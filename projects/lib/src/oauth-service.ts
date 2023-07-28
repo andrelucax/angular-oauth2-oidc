@@ -2193,13 +2193,13 @@ export class OAuthService extends AuthConfig implements OnDestroy {
     }
 
     if (Array.isArray(claims.aud)) {
-      if (claims.aud.every(v => !validAudiences.some(va => va === v))) {
+      if (claims.aud.every((v) => !validAudiences.some((va) => va === v))) {
         const err = 'Wrong audience: ' + claims.aud.join(',');
         this.logger.warn(err);
         return Promise.reject(err);
       }
     } else {
-      if (!validAudiences.some(va => va === claims.aud)) {
+      if (!validAudiences.some((va) => va === claims.aud)) {
         const err = 'Wrong audience: ' + claims.aud;
         this.logger.warn(err);
         return Promise.reject(err);
@@ -2272,7 +2272,11 @@ export class OAuthService extends AuthConfig implements OnDestroy {
     const expiresAtMSec = claims.exp * 1000;
     const clockSkewInMSec = this.getClockSkewInMsec(); // (this.getClockSkewInMsec() || 600) * 1000;
 
-    if (!this.skipExpirationChecks && (issuedAtMSec - clockSkewInMSec >= now || expiresAtMSec + clockSkewInMSec - this.decreaseExpirationBySec <= now)) {
+    if (
+      !this.skipExpirationChecks &&
+      (issuedAtMSec - clockSkewInMSec >= now ||
+        expiresAtMSec + clockSkewInMSec - this.decreaseExpirationBySec <= now)
+    ) {
       const err = 'Token has expired';
       console.error(err);
       console.error({
