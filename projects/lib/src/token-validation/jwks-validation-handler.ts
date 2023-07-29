@@ -2,7 +2,7 @@ import * as rs from 'jsrsasign';
 import {
   AbstractValidationHandler,
   ValidationParams,
-} from 'angular-oauth2-oidc';
+} from './validation-handler';
 
 const err = `PLEASE READ THIS CAREFULLY:
 
