@@ -1,5 +1,5 @@
 {
-  "name": "angular-oauth2-oidc",
+  "name": "lacuna-oauth2-oidc",
   "version": "15.0.0",
   "license": "MIT",
   "scripts": {
@@ -14,7 +14,7 @@
     "tsc": "tsc",
     "prettier": "prettier --write projects/**/*.ts",
     "docs": "npm run docs:build -- --disableCoverage --disablePrivate --disableInternal --includes docs-src",
-    "docs:build": "compodoc -p projects/lib/tsconfig.lib.json -n angular-oauth2-oidc -d docs --hideGenerator",
+    "docs:build": "compodoc -p projects/lib/tsconfig.lib.json -n lacuna-oauth2-oidc -d docs --hideGenerator",
     "docs:serve": "npm run docs:build -- -s",
     "docs:watch": "npm run docs:build -- -s -w",
     "format": "prettier --single-quote --write projects/**/*.ts",

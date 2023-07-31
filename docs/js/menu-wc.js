@@ -15,7 +15,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
         <nav>
             <ul class="list">
                 <li class="title">
-                    <a href="index.html" data-type="index-link">angular-oauth2-oidc</a>
+                    <a href="index.html" data-type="index-link">lacuna-oauth2-oidc</a>
                 </li>
 
                 <li class="divider"></li>
