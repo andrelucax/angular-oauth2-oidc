@@ -1,4 +1,4 @@
-import { AuthConfig } from 'angular-oauth2-oidc';
+import { AuthConfig } from 'lacuna-oauth2-oidc';
 import { useSilentRefreshForCodeFlow } from '../flags';
 
 export const authCodeFlowConfig: AuthConfig = {
