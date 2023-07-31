@@ -1,4 +1,4 @@
-# angular-oauth2-oidc
+# lacuna-oauth2-oidc
 
 Support for OAuth 2 and OpenId Connect (OIDC) in Angular. Already prepared for the upcoming OAuth 2.1.
 

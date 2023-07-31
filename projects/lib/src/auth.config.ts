@@ -204,6 +204,16 @@ export class AuthConfig {
    */
   public skipSubjectCheck? = false;
 
+  /*
+   * Defines wether to check the expiration time and the issued at time of the id token.
+   */
+  public skipExpirationChecks? = false;
+
+  /*
+   * Defines the valid audiences that the id token can contain. If not specified, the clientId is used.
+   */
+  public validAudiences?: string[];
+
   public useIdTokenHintForSilentRefresh? = false;
 
   /**
