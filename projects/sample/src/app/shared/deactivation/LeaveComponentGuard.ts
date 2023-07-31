@@ -1,6 +1,6 @@
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-export class LeaveComponentGuard  {
+export class LeaveComponentGuard {
   canDeactivate(
     component: any,
     route: ActivatedRouteSnapshot,

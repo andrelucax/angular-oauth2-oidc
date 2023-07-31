@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DateTimeProvider } from 'angular-oauth2-oidc';
+import { DateTimeProvider } from 'lacuna-oauth2-oidc';
 
 // Enabled this provider will make the sample to fail, since the demo IdP is correctly synced to world time.
 // This is just a sample of the implementation, if you need it.
