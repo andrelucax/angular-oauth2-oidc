@@ -1,5 +1,5 @@
 import { authPasswordFlowConfig } from '../auth-password-flow.config';
-import { OAuthService } from 'angular-oauth2-oidc';
+import { OAuthService } from 'lacuna-oauth2-oidc';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

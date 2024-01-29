@@ -5,6 +5,7 @@ export interface ValidationParams {
   accessToken: string;
   idTokenHeader: object;
   idTokenClaims: object;
+  bypassTimestampCheck: boolean;
   jwks: object;
   loadKeys: () => Promise<object>;
 }

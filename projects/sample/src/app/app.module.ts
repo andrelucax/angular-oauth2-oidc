@@ -5,7 +5,7 @@ import {
   OAuthModule,
   OAuthStorage,
   DateTimeProvider,
-} from 'angular-oauth2-oidc';
+} from 'lacuna-oauth2-oidc';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';

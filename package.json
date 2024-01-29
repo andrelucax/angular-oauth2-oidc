@@ -1,5 +1,5 @@
 {
-  "name": "angular-oauth2-oidc",
+  "name": "lacuna-oauth2-oidc",
   "version": "17.0.0",
   "license": "MIT",
   "scripts": {
@@ -37,8 +37,6 @@
     "@angular/router": "^17.0.7",
     "@popperjs/core": "^2.9.2",
     "@webcomponents/custom-elements": "^1.4.3",
-    "angular-oauth2-oidc": "^15.0.1",
-    "angular-oauth2-oidc-jwks": "^15.0.1",
     "base64-js": "^1.5.1",
     "bootstrap": "^3.4.1",
     "fast-sha256": "^1.3.0",
@@ -54,8 +52,8 @@
     "@angular-eslint/builder": "16.0.2",
     "@angular-eslint/eslint-plugin": "16.0.2",
     "@angular-eslint/eslint-plugin-template": "16.0.2",
-    "@angular-eslint/schematics": "16.0.2",
-    "@angular-eslint/template-parser": "16.0.2",
+    "@angular-eslint/schematics": "17.2.1",
+    "@angular-eslint/template-parser": "17.2.1",
     "@angular/cli": "^17.0.7",
     "@angular/compiler-cli": "^17.0.7",
     "@angular/language-service": "^17.0.7",

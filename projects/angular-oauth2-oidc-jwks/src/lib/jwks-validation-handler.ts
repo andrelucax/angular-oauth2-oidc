@@ -2,7 +2,7 @@ import * as rs from 'jsrsasign';
 import {
   AbstractValidationHandler,
   ValidationParams,
-} from 'angular-oauth2-oidc';
+} from 'lacuna-oauth2-oidc';
 
 /**
  * Validates the signature of an id_token against one
@@ -106,10 +106,15 @@ export class JwksValidationHandler extends AbstractValidationHandler {
     }
 
     let keyObj = rs.KEYUTIL.getKey(key);
-    let validationOptions = {
+    let validationOptions: any = {
       alg: this.allowedAlgorithms,
       gracePeriod: this.gracePeriodInSec,
     };
+
+    if (params.bypassTimestampCheck) {
+      validationOptions.verifyAt = params.idTokenClaims['exp'] - 1;
+    }
+
     let isValid = rs.KJUR.jws.JWS.verifyJWT(
       params.idToken,
       keyObj,

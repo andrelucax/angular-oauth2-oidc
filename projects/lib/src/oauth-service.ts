@@ -2185,14 +2185,20 @@ export class OAuthService extends AuthConfig implements OnDestroy {
       savedNonce = this._storage.getItem('nonce');
     }
 
+    let validAudiences = [this.clientId];
+
+    if (this.validAudiences) {
+      validAudiences = this.validAudiences;
+    }
+
     if (Array.isArray(claims.aud)) {
-      if (claims.aud.every((v) => v !== this.clientId)) {
+      if (claims.aud.every((v) => !validAudiences.some((va) => va === v))) {
         const err = 'Wrong audience: ' + claims.aud.join(',');
         this.logger.warn(err);
         return Promise.reject(err);
       }
     } else {
-      if (claims.aud !== this.clientId) {
+      if (!validAudiences.some((va) => va === claims.aud)) {
         const err = 'Wrong audience: ' + claims.aud;
         this.logger.warn(err);
         return Promise.reject(err);
@@ -2266,8 +2272,9 @@ export class OAuthService extends AuthConfig implements OnDestroy {
     const clockSkewInMSec = this.getClockSkewInMsec(); // (this.getClockSkewInMsec() || 600) * 1000;
 
     if (
-      issuedAtMSec - clockSkewInMSec >= now ||
-      expiresAtMSec + clockSkewInMSec - this.decreaseExpirationBySec <= now
+      !this.skipExpirationChecks &&
+      (issuedAtMSec - clockSkewInMSec >= now ||
+        expiresAtMSec + clockSkewInMSec - this.decreaseExpirationBySec <= now)
     ) {
       const err = 'Token has expired';
       console.error(err);
@@ -2285,6 +2292,7 @@ export class OAuthService extends AuthConfig implements OnDestroy {
       jwks: this.jwks,
       idTokenClaims: claims,
       idTokenHeader: header,
+      bypassTimestampCheck: this.skipExpirationChecks,
       loadKeys: () => this.loadJwks(),
     };
 
